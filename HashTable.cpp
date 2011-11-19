@@ -50,7 +50,19 @@ FreeListNode *HashTable::getNode(size_t blockSize)
 }
 
 HashTable::~HashTable() {
-	// TODO Auto-generated destructor stub
+
+	if (m_headList)
+	{
+		FreeListNodeHashTable *curr;
+		for (curr = m_headList->right; curr != NULL; curr = curr->right) {
+			delete curr;
+		}
+		for (curr = m_headList->left; curr != NULL; curr = curr->left) {
+			delete curr;
+		}
+		delete m_headList;
+	}
+	delete m_hashTable;
 }
 
 

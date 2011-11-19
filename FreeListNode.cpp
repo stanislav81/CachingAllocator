@@ -24,7 +24,7 @@ FreeListNode::FreeListNode(size_t blockSize) {
 void *FreeListNode::getBlock()
 {
 	ChunkHeader *chunk;
-	char *block;
+	void *block;
 
 	// если chunk в m_freeList берем его оттуда и кладем в m_usedList
 	if (m_freeList)
@@ -41,13 +41,14 @@ void *FreeListNode::getBlock()
 			m_usedList->last = chunk;
 		}
 		m_usedList = chunk;
-		return (void *)(m_usedList + sizeof(ChunkHeader));
+		return (void *)((char *)m_usedList + sizeof(ChunkHeader));
 	}
 	// иначе создаем новой chunk и кледем его в m_usedList
 	else
 	{
 		size_t chunkSize = sizeof(ChunkHeader) + m_blockSize;
-		block = (char *)malloc(chunkSize);
+		block = malloc(chunkSize);
+
 		if (!block)
 			throw bad_alloc();
 		ChunkHeader *chunk = (ChunkHeader *)block;
@@ -65,7 +66,8 @@ void *FreeListNode::getBlock()
 			m_usedList = chunk;
 		}
 	}
-	return (void *)(block + sizeof(ChunkHeader));
+
+	return (void *)((char*)block + sizeof(ChunkHeader));
 }
 
 void FreeListNode::freeBlock(void * ptr)
@@ -101,7 +103,22 @@ void FreeListNode::freeBlock(void * ptr)
 }
 
 FreeListNode::~FreeListNode() {
-	// TODO Auto-generated destructor stub
+
+	ChunkHeader *ptr = m_freeList;
+	while (ptr)
+	{
+		void *tmp = (void *)ptr;
+		ptr = ptr->next;
+		free(tmp);
+	}
+
+	ptr = m_usedList;
+	while (ptr)
+	{
+		void *tmp = (void *)ptr;
+		ptr = ptr->next;
+		free((void *)tmp);
+	}
 }
 
 } /* namespace cache_allocator */

@@ -17,7 +17,12 @@ CacheAllocator::CacheAllocator(): m_hashTableSize(100*1024)
 
 
 CacheAllocator::~CacheAllocator() {
-	// TODO Auto-generated destructor stub
+
+	for (std::map<size_t, FreeListNode*>::iterator it = tree.begin(); it != tree.end(); ++it) {
+		delete (*it).second;
+	}
+
+	delete m_hashTable;
 }
 
 } /* namespace cache_allocator */

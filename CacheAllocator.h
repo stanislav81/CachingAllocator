@@ -53,6 +53,32 @@ public:
 	}
 
 	template <class T>
+	T *getBlock(size_t number) {
+
+		size_t blockSize = sizeof (T) * number;
+		FreeListNode *node;
+		char *array;
+
+		if (blockSize < m_hashTableSize )
+		{
+			node = m_hashTable->getNode(blockSize);
+			array = static_cast<char*>(node->getBlock());
+		}
+		else
+		{
+			std::map<size_t, FreeListNode*>::iterator it = tree.find(blockSize);
+			if (it == tree.end()) {
+				node = new FreeListNode(blockSize);
+				array = static_cast<char*>(node->getBlock());
+				tree[blockSize] = node;
+			} else {
+				array = static_cast<char*>((*it).second->getBlock());
+			}
+		}
+		return (T*)(array);
+	}
+
+	template <class T>
 	void freeBlock(T *ptr) {
 		size_t blockSize = sizeof (T);
 
@@ -101,11 +127,11 @@ public:
 		FreeListNodeHashTable *headHashTable = m_hashTable->getHeadHashTable();
 		if (headHashTable) {
 			FreeListNodeHashTable *curr;
-			for (curr = headHashTable; curr != NULL; curr = headHashTable->right) {
+			for (curr = headHashTable; curr != NULL; curr = curr->right) {
 				//
 			}
 
-			for (curr = headHashTable; curr != NULL; curr = headHashTable->left) {
+			for (curr = headHashTable; curr != NULL; curr = curr->left) {
 				//
 			}
 		}
