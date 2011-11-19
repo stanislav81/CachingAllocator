@@ -1,3 +1,27 @@
-Simple caching allocator
-
+Simple caching allocator on C++
 allocate fixed size blocks  
+
+requirements: stl-library
+
+usage: 
+
+/* Usage Example
+
+// cache allocator
+cache_allocator::CacheAllocator ca;
+
+//any class B 
+class B {};
+
+// prepare NUMBER objects B-class
+ca.prepareFreeList<B>(NUMBER);
+
+// get pointer on B-object
+B *b = ca.getBlock<B>(); 
+
+// free object by pointer "b" 
+ca.freeBlock(b);
+
+*/
+
+For more detailed descripsion see main.cpp function testGetFree()
