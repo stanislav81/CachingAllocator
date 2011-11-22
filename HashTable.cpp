@@ -25,10 +25,6 @@ FreeListNode *HashTable::getNode(size_t blockSize)
 {
 	FreeListNodeHashTable *nodePtr;
 
-	if (blockSize >= m_tableSize) {
-		throw blockSize;
-	}
-
 	nodePtr = m_hashTable[blockSize];
 
 	if (nodePtr == (FreeListNodeHashTable*)NULL)
