@@ -24,12 +24,23 @@ class B : A {
 	char buffer[128];
 public:
 	B(): A ()
-	{}
+	{
+		buffer[0] = 'A';
+	}
 	void setD(int& x) {
 		d = x;
 	}
 	int& getD() {return d;}
+	~B() {
+		buffer[0] = 0;
+	}
 };
+
+void testInitAlloc() {
+	cache_allocator::CacheAllocator ca;
+	int *b = ca.getBlock<int>();
+	ca.freeBlock(b);
+}
 
 void testGetFree() {
 
@@ -81,6 +92,8 @@ void testGetFree() {
 
 int main(int argc, char **argv) {
 
+
+	testInitAlloc();
 	testGetFree();
 
 	return 0;
