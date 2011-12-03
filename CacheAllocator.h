@@ -139,6 +139,20 @@ public:
 		delete ptrArray;
 	}
 
+	void prepareFreeList(size_t number, size_t size) {
+
+		char** ptrArray = new char*[number];
+
+		for (size_t i = 0; i < size; i++) {
+			ptrArray[i] = getBlock<char>(size);
+		}
+
+		for (size_t i = 0; i < size; i++) {
+			freeBlock(ptrArray[i]);
+		}
+		delete ptrArray;
+	}
+
 	void collect() {
 		// TO DO !!!
 

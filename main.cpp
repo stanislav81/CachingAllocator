@@ -36,6 +36,15 @@ public:
 	}
 };
 
+void testPrepareSimpleTypeBlocks() {
+	cache_allocator::CacheAllocator ca;
+
+	ca.prepareFreeList(100, sizeof(int));
+
+	int *b = ca.getBlock<int>();
+	ca.freeBlock(b);
+}
+
 void testArrayBclass() {
 	cache_allocator::CacheAllocator ca;
 	B *bClassArray = ca.getBlock<B>(100);
@@ -110,6 +119,7 @@ void testGetFree() {
 
 int main(int argc, char **argv) {
 
+	testPrepareSimpleTypeBlocks();
 	testArrayBclass();
 	testArrayChar();
 	testArrayInt();
