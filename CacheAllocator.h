@@ -18,9 +18,10 @@ namespace cache_allocator {
 
 class CacheAllocator {
 	std::map<size_t, FreeListNode*> tree;
+	std::map<size_t, FreeListNode*>::iterator it;
 
-	HashTable *m_hashTable;
 	size_t m_hashTableSize;
+	HashTable *m_hashTable;
 
 public:
 	CacheAllocator();
@@ -40,7 +41,7 @@ public:
 		}
 		else
 		{
-			std::map<size_t, FreeListNode*>::iterator it = tree.find(blockSize);
+			it = tree.find(blockSize);
 			if (it == tree.end()) {
 				node = new FreeListNode(blockSize);
 				array = static_cast<char*>(node->getBlock());
@@ -67,7 +68,7 @@ public:
 		}
 		else
 		{
-			std::map<size_t, FreeListNode*>::iterator it = tree.find(blockSize);
+			it = tree.find(blockSize);
 			if (it == tree.end()) {
 				node = new FreeListNode(blockSize);
 				array = static_cast<char*>(node->getBlock());
@@ -101,7 +102,7 @@ public:
 		}
 		else
 		{
-			std::map<size_t, FreeListNode*>::iterator it = tree.find(blockSize);
+			it = tree.find(blockSize);
 			if (it == tree.end()) {
 				cerr << "error: This block does not belong to the CacheAllocator" << endl;
 			} else {
@@ -172,7 +173,7 @@ private:
 		}
 		else
 		{
-			std::map<size_t, FreeListNode*>::iterator it = tree.find(blockSize);
+			it = tree.find(blockSize);
 			if (it == tree.end()) {
 				cerr << "error: This block does not belong to the CacheAllocator" << endl;
 			} else {
