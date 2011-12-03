@@ -110,207 +110,16 @@ public:
 		}
 	}
 
-	void freeBlock(char *ptr) {
-		ChunkHeader *block = (ChunkHeader *)((char *)ptr - sizeof(ChunkHeader));
-		size_t blockSize = block->size;
-
-		if (blockSize < m_hashTableSize)
-		{
-			FreeListNode *node = m_hashTable->getNode(blockSize);
-			node->freeBlock(ptr);
-		}
-		else
-		{
-			std::map<size_t, FreeListNode*>::iterator it = tree.find(blockSize);
-			if (it == tree.end()) {
-				cerr << "error: This block does not belong to the CacheAllocator" << endl;
-			} else {
-				(*it).second->freeBlock((void *)ptr);
-			}
-		}
-	}
-
-	void freeBlock(bool *ptr) {
-		ChunkHeader *block = (ChunkHeader *)((char *)ptr - sizeof(ChunkHeader));
-		size_t blockSize = block->size;
-
-		if (blockSize < m_hashTableSize)
-		{
-			FreeListNode *node = m_hashTable->getNode(blockSize);
-			node->freeBlock(ptr);
-		}
-		else
-		{
-			std::map<size_t, FreeListNode*>::iterator it = tree.find(blockSize);
-			if (it == tree.end()) {
-				cerr << "error: This block does not belong to the CacheAllocator" << endl;
-			} else {
-				(*it).second->freeBlock((void *)ptr);
-			}
-		}
-	}
-
-	void freeBlock(int *ptr) {
-		ChunkHeader *block = (ChunkHeader *)((char *)ptr - sizeof(ChunkHeader));
-		size_t blockSize = block->size;
-
-		if (blockSize < m_hashTableSize)
-		{
-			FreeListNode *node = m_hashTable->getNode(blockSize);
-			node->freeBlock(ptr);
-		}
-		else
-		{
-			std::map<size_t, FreeListNode*>::iterator it = tree.find(blockSize);
-			if (it == tree.end()) {
-				cerr << "error: This block does not belong to the CacheAllocator" << endl;
-			} else {
-				(*it).second->freeBlock((void *)ptr);
-			}
-		}
-	}
-
-	void freeBlock(size_t *ptr) {
-		ChunkHeader *block = (ChunkHeader *)((char *)ptr - sizeof(ChunkHeader));
-		size_t blockSize = block->size;
-
-		if (blockSize < m_hashTableSize)
-		{
-			FreeListNode *node = m_hashTable->getNode(blockSize);
-			node->freeBlock(ptr);
-		}
-		else
-		{
-			std::map<size_t, FreeListNode*>::iterator it = tree.find(blockSize);
-			if (it == tree.end()) {
-				cerr << "error: This block does not belong to the CacheAllocator" << endl;
-			} else {
-				(*it).second->freeBlock((void *)ptr);
-			}
-		}
-	}
-
-	void freeBlock(long int *ptr) {
-		ChunkHeader *block = (ChunkHeader *)((char *)ptr - sizeof(ChunkHeader));
-		size_t blockSize = block->size;
-
-		if (blockSize < m_hashTableSize)
-		{
-			FreeListNode *node = m_hashTable->getNode(blockSize);
-			node->freeBlock(ptr);
-		}
-		else
-		{
-			std::map<size_t, FreeListNode*>::iterator it = tree.find(blockSize);
-			if (it == tree.end()) {
-				cerr << "error: This block does not belong to the CacheAllocator" << endl;
-			} else {
-				(*it).second->freeBlock((void *)ptr);
-			}
-		}
-	}
-
-	void freeBlock(long long int *ptr) {
-		ChunkHeader *block = (ChunkHeader *)((char *)ptr - sizeof(ChunkHeader));
-		size_t blockSize = block->size;
-
-		if (blockSize < m_hashTableSize)
-		{
-			FreeListNode *node = m_hashTable->getNode(blockSize);
-			node->freeBlock(ptr);
-		}
-		else
-		{
-			std::map<size_t, FreeListNode*>::iterator it = tree.find(blockSize);
-			if (it == tree.end()) {
-				cerr << "error: This block does not belong to the CacheAllocator" << endl;
-			} else {
-				(*it).second->freeBlock((void *)ptr);
-			}
-		}
-	}
-
-	void freeBlock(short *ptr) {
-		ChunkHeader *block = (ChunkHeader *)((char *)ptr - sizeof(ChunkHeader));
-		size_t blockSize = block->size;
-
-		if (blockSize < m_hashTableSize)
-		{
-			FreeListNode *node = m_hashTable->getNode(blockSize);
-			node->freeBlock(ptr);
-		}
-		else
-		{
-			std::map<size_t, FreeListNode*>::iterator it = tree.find(blockSize);
-			if (it == tree.end()) {
-				cerr << "error: This block does not belong to the CacheAllocator" << endl;
-			} else {
-				(*it).second->freeBlock((void *)ptr);
-			}
-		}
-	}
-
-	void freeBlock(float *ptr) {
-		ChunkHeader *block = (ChunkHeader *)((char *)ptr - sizeof(ChunkHeader));
-		size_t blockSize = block->size;
-
-		if (blockSize < m_hashTableSize)
-		{
-			FreeListNode *node = m_hashTable->getNode(blockSize);
-			node->freeBlock(ptr);
-		}
-		else
-		{
-			std::map<size_t, FreeListNode*>::iterator it = tree.find(blockSize);
-			if (it == tree.end()) {
-				cerr << "error: This block does not belong to the CacheAllocator" << endl;
-			} else {
-				(*it).second->freeBlock((void *)ptr);
-			}
-		}
-	}
-
-	void freeBlock(double *ptr) {
-		ChunkHeader *block = (ChunkHeader *)((char *)ptr - sizeof(ChunkHeader));
-		size_t blockSize = block->size;
-
-		if (blockSize < m_hashTableSize)
-		{
-			FreeListNode *node = m_hashTable->getNode(blockSize);
-			node->freeBlock(ptr);
-		}
-		else
-		{
-			std::map<size_t, FreeListNode*>::iterator it = tree.find(blockSize);
-			if (it == tree.end()) {
-				cerr << "error: This block does not belong to the CacheAllocator" << endl;
-			} else {
-				(*it).second->freeBlock((void *)ptr);
-			}
-		}
-	}
-
-	void freeBlock(long double *ptr) {
-		ChunkHeader *block = (ChunkHeader *)((char *)ptr - sizeof(ChunkHeader));
-		size_t blockSize = block->size;
-
-		if (blockSize < m_hashTableSize)
-		{
-			FreeListNode *node = m_hashTable->getNode(blockSize);
-			node->freeBlock(ptr);
-		}
-		else
-		{
-			std::map<size_t, FreeListNode*>::iterator it = tree.find(blockSize);
-			if (it == tree.end()) {
-				cerr << "error: This block does not belong to the CacheAllocator" << endl;
-			} else {
-				(*it).second->freeBlock((void *)ptr);
-			}
-		}
-	}
-
-
+	void freeBlock(char *ptr) 			{	freeSimpleType(ptr);	}
+	void freeBlock(bool *ptr) 			{	freeSimpleType(ptr);	}
+	void freeBlock(int *ptr) 			{	freeSimpleType(ptr);	}
+	void freeBlock(size_t *ptr) 		{	freeSimpleType(ptr);	}
+	void freeBlock(long int *ptr) 		{	freeSimpleType(ptr);	}
+	void freeBlock(long long int *ptr) 	{	freeSimpleType(ptr);	}
+	void freeBlock(short *ptr) 			{	freeSimpleType(ptr);	}
+	void freeBlock(float *ptr) 			{	freeSimpleType(ptr); 	}
+	void freeBlock(double *ptr) 		{ 	freeSimpleType(ptr); 	}
+	void freeBlock(long double *ptr) 	{ 	freeSimpleType(ptr);	}
 
 	template<class T>
 	void prepareFreeList(size_t size) {
@@ -347,6 +156,27 @@ public:
 
 			for (curr = headHashTable; curr != NULL; curr = curr->left) {
 				//
+			}
+		}
+	}
+
+private:
+	inline void freeSimpleType(void * ptr) {
+		ChunkHeader *block = (ChunkHeader *)((char *)ptr - sizeof(ChunkHeader));
+		size_t blockSize = block->size;
+
+		if (blockSize < m_hashTableSize)
+		{
+			FreeListNode *node = m_hashTable->getNode(blockSize);
+			node->freeBlock(ptr);
+		}
+		else
+		{
+			std::map<size_t, FreeListNode*>::iterator it = tree.find(blockSize);
+			if (it == tree.end()) {
+				cerr << "error: This block does not belong to the CacheAllocator" << endl;
+			} else {
+				(*it).second->freeBlock((void *)ptr);
 			}
 		}
 	}
