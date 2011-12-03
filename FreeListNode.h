@@ -14,6 +14,7 @@ namespace cache_allocator {
 struct ChunkHeader {
 	ChunkHeader *last;
 	ChunkHeader *next;
+	size_t size;
 };
 
 class FreeListNode {

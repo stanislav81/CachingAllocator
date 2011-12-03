@@ -52,6 +52,7 @@ void *FreeListNode::getBlock()
 		if (!block)
 			throw bad_alloc();
 		ChunkHeader *chunk = (ChunkHeader *)block;
+		chunk->size = m_blockSize;
 
 		if (m_usedList)
 		{
@@ -66,7 +67,6 @@ void *FreeListNode::getBlock()
 			m_usedList = chunk;
 		}
 	}
-
 	return (void *)((char*)block + sizeof(ChunkHeader));
 }
 

@@ -36,6 +36,24 @@ public:
 	}
 };
 
+void testArrayBclass() {
+	cache_allocator::CacheAllocator ca;
+	B *bClassArray = ca.getBlock<B>(100);
+	ca.freeBlock(bClassArray);
+}
+
+void testArrayChar() {
+	cache_allocator::CacheAllocator ca;
+	char *charArray = ca.getBlock<char>(100);
+	ca.freeBlock(charArray);
+}
+
+void testArrayInt() {
+	cache_allocator::CacheAllocator ca;
+	int *intArray = ca.getBlock<int>(100);
+	ca.freeBlock(intArray);
+}
+
 void testInitAlloc() {
 	cache_allocator::CacheAllocator ca;
 	int *b = ca.getBlock<int>();
@@ -92,9 +110,13 @@ void testGetFree() {
 
 int main(int argc, char **argv) {
 
-
+	testArrayBclass();
+	testArrayChar();
+	testArrayInt();
 	testInitAlloc();
 	testGetFree();
+
+	cout << "Normal termination" << endl;
 
 	return 0;
 }
